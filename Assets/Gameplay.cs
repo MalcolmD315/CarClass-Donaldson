@@ -16,13 +16,14 @@ public class Gameplay : MonoBehaviour
 {
     //Variables for player input field
     [SerializeField] List<TextMeshProUGUI> playerInputField = new List<TextMeshProUGUI>(2);
+    [SerializeField] List<TextMeshProUGUI> feedbackText = new List<TextMeshProUGUI>(5);
     [SerializeField] GameObject submitButton; 
     private Car inputCar;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        TurnOffFeedback(feedbackText);        
     }
 
     // Update is called once per frame
@@ -32,17 +33,17 @@ public class Gameplay : MonoBehaviour
     }
 
     //Input field method
-    private void CarInstantiate(string make, int year) 
+    private void CarInstantiate(string make, int year, List<TextMeshProUGUI> feedback) 
     {
-        if(make != "Error" && year != 0) 
-        {
+        TurnOffFeedback(feedback);
+        if (make != "Error" && year != 0) 
+        {            
             inputCar.YearOfCar = year;
-            inputCar.MakeOfCar = make;
-
+            inputCar.MakeOfCar = make;            
         }
         else 
         {
-
+            feedback[4].SetText($"Invalid Input!\r\nDouble check car Make spelling.\r\nYear has to be after 1886.");
         }
     }  
     
@@ -65,7 +66,7 @@ public class Gameplay : MonoBehaviour
     private List<string> CarModels() 
     {
         List<string> models = new List<string>();
-        StreamReader listOfCarModels = File.OpenText(Application.streamingAssetsPath + "/words.txt");
+        StreamReader listOfCarModels = File.OpenText(Application.streamingAssetsPath + "/CarMakeList.docx");
         while (!listOfCarModels.EndOfStream) 
         {
             string carModel = listOfCarModels.ReadLine();
@@ -79,7 +80,8 @@ public class Gameplay : MonoBehaviour
     private int CarYear(List<TextMeshProUGUI> playerInput)
     {
         string input = playerInput[1].ToString();
-        int carYear = int.Parse(input);
+        int carYear = 0; 
+        int.TryParse(input, out carYear);
         if (carYear >= 1886 && carYear <= 2024) 
         {
             return carYear;
@@ -88,9 +90,18 @@ public class Gameplay : MonoBehaviour
         return carYear;
     }
 
+    //Feedback turn off method
+    private void TurnOffFeedback(List<TextMeshProUGUI> feedbackText) 
+    {
+        for(int i = 0; i < feedbackText.Count; i++) 
+        {
+            feedbackText[i].SetText("");
+        }
+    }
+
     //Submit button method
     public void OnSubmitClick() 
     {        
-        CarInstantiate(MakeInput(playerInputField), CarYear(playerInputField));
+        CarInstantiate(MakeInput(playerInputField), CarYear(playerInputField), feedbackText);
     }
 }
