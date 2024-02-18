@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.IO;
 
 public class Gameplay : MonoBehaviour
 {
@@ -32,7 +33,37 @@ public class Gameplay : MonoBehaviour
 
     //Input field method
     private GameObject CarInstantiate() 
-    {
+    {        
         return GameObject.Instantiate(car);
+    }  
+    
+    //Method to check and give the car models info
+    private string MakeInput(List<string> playerInput) 
+    {
+        List<string> carModelCheck = CarModels();
+        for(int index = 0; index < carModelCheck.Count; index++) 
+        {
+            if(playerInput[0] == carModelCheck[index]) 
+            {
+                return playerInput[index];
+            }
+        }
+        return "Error";
     }
+
+    //Making List of car makes
+    private List<string> CarModels() 
+    {
+        List<string> models = new List<string>();
+        StreamReader listOfCarModels = File.OpenText(Application.streamingAssetsPath + "/words.txt");
+        while (!listOfCarModels.EndOfStream) 
+        {
+            string carModel = listOfCarModels.ReadLine();
+            models.Add(carModel);
+        }
+        listOfCarModels.Close();
+        return models;
+    }
+
+    
 }
