@@ -15,8 +15,9 @@ using System.IO;
 public class Gameplay : MonoBehaviour
 {
     //Variables for player input field
-    [SerializeField] List<TextMeshProUGUI> playerInputField = new List<TextMeshProUGUI>(3);
-    [SerializeField] GameObject submitButton;    
+    [SerializeField] List<TextMeshProUGUI> playerInputField = new List<TextMeshProUGUI>(2);
+    [SerializeField] GameObject submitButton; 
+    private Car inputCar;
 
     // Start is called before the first frame update
     void Start()
@@ -31,23 +32,30 @@ public class Gameplay : MonoBehaviour
     }
 
     //Input field method
-    private void CarInstantiate(string make, string model, int year) 
+    private void CarInstantiate(string make, int year) 
     {
         if(make != "Error" && year != 0) 
         {
-            
-        }        
+            inputCar.YearOfCar = year;
+            inputCar.MakeOfCar = make;
+
+        }
+        else 
+        {
+
+        }
     }  
     
     //Method to check and give the car models info
-    private string MakeInput(List<string> playerInput) 
+    private string MakeInput(List<TextMeshProUGUI> playerInput) 
     {
         List<string> carModelCheck = CarModels();
+        string input = playerInput[0].ToString();
         for(int index = 0; index < carModelCheck.Count; index++) 
         {
-            if(playerInput[0] == carModelCheck[index]) 
+            if(input == carModelCheck[index]) 
             {
-                return playerInput[index];
+                return input;
             }
         }
         return "Error";
@@ -68,14 +76,21 @@ public class Gameplay : MonoBehaviour
     }
 
     //Method to check year
-    private int CarYear(List<string> playerInput)
+    private int CarYear(List<TextMeshProUGUI> playerInput)
     {
-        int carYear = int.Parse(playerInput[2]);
+        string input = playerInput[1].ToString();
+        int carYear = int.Parse(input);
         if (carYear >= 1886 && carYear <= 2024) 
         {
             return carYear;
         }
         carYear = 0;
         return carYear;
+    }
+
+    //Submit button method
+    public void OnSubmitClick() 
+    {        
+        CarInstantiate(MakeInput(playerInputField), CarYear(playerInputField));
     }
 }
