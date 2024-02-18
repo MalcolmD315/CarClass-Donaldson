@@ -13,6 +13,11 @@ using TMPro;
 
 public class Gameplay : MonoBehaviour
 {
+    //Variables for player input field
+    [SerializeField] List<TextMeshProUGUI> playerInputField = new List<TextMeshProUGUI>(3);
+    [SerializeField] GameObject submitButton;
+    [SerializeField] GameObject car;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +28,11 @@ public class Gameplay : MonoBehaviour
     void Update()
     {
         
+    }
+
+    //Input field method
+    private GameObject CarInstantiate() 
+    {
+        return GameObject.Instantiate(car);
     }
 }
