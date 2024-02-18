@@ -2255,6 +2255,7 @@ MonoBehaviour:
   - {fileID: 1538657637}
   - {fileID: 1749502075}
   submitButton: {fileID: 887615404}
+  car: {fileID: 3506193232617827670, guid: dc9889a8ba136cf4abb017982f676af5, type: 3}
 --- !u!1 &1538657635
 GameObject:
   m_ObjectHideFlags: 0
