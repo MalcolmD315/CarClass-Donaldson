@@ -16,8 +16,7 @@ public class Gameplay : MonoBehaviour
 {
     //Variables for player input field
     [SerializeField] List<TextMeshProUGUI> playerInputField = new List<TextMeshProUGUI>(3);
-    [SerializeField] GameObject submitButton;
-    [SerializeField] GameObject car;
+    [SerializeField] GameObject submitButton;    
 
     // Start is called before the first frame update
     void Start()
@@ -32,9 +31,12 @@ public class Gameplay : MonoBehaviour
     }
 
     //Input field method
-    private GameObject CarInstantiate() 
-    {        
-        return GameObject.Instantiate(car);
+    private void CarInstantiate(string make, string model, int year) 
+    {
+        if(make != "Error" && year != 0) 
+        {
+            
+        }        
     }  
     
     //Method to check and give the car models info
@@ -65,5 +67,15 @@ public class Gameplay : MonoBehaviour
         return models;
     }
 
-    
+    //Method to check year
+    private int CarYear(List<string> playerInput)
+    {
+        int carYear = int.Parse(playerInput[2]);
+        if (carYear >= 1886 && carYear <= 2024) 
+        {
+            return carYear;
+        }
+        carYear = 0;
+        return carYear;
+    }
 }
