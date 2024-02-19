@@ -2853,9 +2853,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85aae413efc85af46ac1fe8fb00f6d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInputField:
-  - {fileID: 1731930382}
-  - {fileID: 1749502075}
+  makeInput: {fileID: 1731930382}
+  yearInput: {fileID: 1749502075}
   feedbackText:
   - {fileID: 85209272}
   - {fileID: 375067754}

@@ -37,6 +37,14 @@ public class Car
         }
     }
 
+    public int CurrentSpeed 
+    {
+        get 
+        {
+            return currentSpeedInMPH;
+        }
+    }
+
     public void AccelerateCar() 
     {
         if(currentSpeedInMPH <= maxSpeedInMPH) 
