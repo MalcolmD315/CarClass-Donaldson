@@ -47,7 +47,7 @@ public class Car
 
     public void AccelerateCar() 
     {
-        if(currentSpeedInMPH <= maxSpeedInMPH) 
+        if(currentSpeedInMPH < maxSpeedInMPH) 
         {
             currentSpeedInMPH++;
         }        

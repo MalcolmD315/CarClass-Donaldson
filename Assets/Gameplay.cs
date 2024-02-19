@@ -31,31 +31,31 @@ public class Gameplay : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            Debug.Log("Up");
-            //car.AccelerateCar();
-            //feedbackText[0].SetText($"{car.CurrentSpeed} MPH");
+        {           
+            inputCar.AccelerateCar();
+            feedbackText[0].SetText($"{inputCar.CurrentSpeed} MPH");
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            Debug.Log("Down");
-            //car.DecelerateCar();
-            //feedbackText[0].SetText($"{car.CurrentSpeed} MPH");
+        {           
+            inputCar.DecelerateCar();
+            feedbackText[0].SetText($"{inputCar.CurrentSpeed} MPH");
         }
     }
 
     //Input field method
-    private void CarInstantiate(string make, int year, List<TextMeshProUGUI> feedback) 
+    private Car CarInstantiate(string make, int year, List<TextMeshProUGUI> feedback, Car car) 
     {
         TurnOffFeedback(feedback);
         if (make != "Error" && year != 0) 
         {
-            CarCreating(feedback, make, year);               
+            car = CarCreating(feedback, make, year);
+            return car;
         }
         else 
         {
             feedback[4].SetText($"Invalid Input!\r\nDouble check car Make spelling.\r\nYear has to be after 1886.");
         }
+        return null;
     }  
     
     //Method to check and give the car models info
@@ -115,11 +115,11 @@ public class Gameplay : MonoBehaviour
     //Submit button method
     public void OnSubmitClick() 
     {        
-        CarInstantiate(MakeInput(makeInput), CarYear(yearInput), feedbackText);
+        inputCar = CarInstantiate(MakeInput(makeInput), CarYear(yearInput), feedbackText, inputCar);
     }
 
     //Creating the car in ui
-    private void CarCreating(List<TextMeshProUGUI> feedback, string make, int year) 
+    private Car CarCreating(List<TextMeshProUGUI> feedback, string make, int year) 
     {
         Car playerCar = new Car();
         playerCar.MakeOfCar = make;
@@ -128,9 +128,7 @@ public class Gameplay : MonoBehaviour
         feedback[2].SetText($"Year: {playerCar.YearOfCar}");
         feedback[1].SetText($"Make: {playerCar.MakeOfCar}");
         feedback[0].SetText($"{playerCar.CurrentSpeed} MPH");
-        playerCar.AccelerateCar();
-        playerCar.DecelerateCar();
-    }
 
-    
+        return playerCar;        
+    }
 }
