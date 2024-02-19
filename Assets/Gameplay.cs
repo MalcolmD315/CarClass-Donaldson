@@ -20,20 +20,28 @@ public class Gameplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI yearInput;
     [SerializeField] List<TextMeshProUGUI> feedbackText = new List<TextMeshProUGUI>(5);
     [SerializeField] GameObject submitButton; 
-    private List<string> listOfMakes = new List<string>();
     private Car inputCar;
 
     // Start is called before the first frame update
     void Start()
     {
-        TurnOffFeedback(feedbackText);
-        CarModels(listOfMakes);        
+        TurnOffFeedback(feedbackText);       
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Debug.Log("Up");
+            //car.AccelerateCar();
+            //feedbackText[0].SetText($"{car.CurrentSpeed} MPH");
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Debug.Log("Down");
+            //car.DecelerateCar();
+            //feedbackText[0].SetText($"{car.CurrentSpeed} MPH");
+        }
     }
 
     //Input field method
@@ -42,7 +50,7 @@ public class Gameplay : MonoBehaviour
         TurnOffFeedback(feedback);
         if (make != "Error" && year != 0) 
         {
-            CarCreating(feedback, inputCar, make, year);               
+            CarCreating(feedback, make, year);               
         }
         else 
         {
@@ -51,15 +59,15 @@ public class Gameplay : MonoBehaviour
     }  
     
     //Method to check and give the car models info
-    private string MakeInput(TextMeshProUGUI make, Car car, List<string> listofMakes) 
-    {        
+    private string MakeInput(TextMeshProUGUI make) 
+    {
+        List<string> checkList = CarMakes();
         string playerInput = make.text; 
         playerInput = playerInput.Remove(playerInput.Length - 1);
-        foreach(string makeList in listOfMakes) 
+        foreach(string makeList in checkList) 
         {
             if(playerInput == makeList) 
-            {
-                Debug.Log(playerInput);                
+            {                                
                 return playerInput;
             }
         }
@@ -67,18 +75,20 @@ public class Gameplay : MonoBehaviour
     }
 
     //Making List of car makes
-    private void CarModels(List<string> makes) 
-    {        
+    private List<string> CarMakes() 
+    {
+        List<string> makes = new List<string>();
         StreamReader listOfCarMakes = File.OpenText(Application.streamingAssetsPath + "/CarList.txt");
         while (!listOfCarMakes.EndOfStream) 
         {
             string carMakes = listOfCarMakes.ReadLine();
             makes.Add(carMakes);
-        }        
+        }
+        return makes;
     }
 
     //Method to check year
-    private int CarYear(TextMeshProUGUI year, Car car)
+    private int CarYear(TextMeshProUGUI year)
     {
         string input = year.text;
         input = input.Remove(input.Length - 1);
@@ -105,11 +115,11 @@ public class Gameplay : MonoBehaviour
     //Submit button method
     public void OnSubmitClick() 
     {        
-        CarInstantiate(MakeInput(makeInput, inputCar, listOfMakes), CarYear(yearInput, inputCar), feedbackText);
+        CarInstantiate(MakeInput(makeInput), CarYear(yearInput), feedbackText);
     }
 
     //Creating the car in ui
-    private void CarCreating(List<TextMeshProUGUI> feedback, Car car, string make, int year) 
+    private void CarCreating(List<TextMeshProUGUI> feedback, string make, int year) 
     {
         Car playerCar = new Car();
         playerCar.MakeOfCar = make;
@@ -118,5 +128,9 @@ public class Gameplay : MonoBehaviour
         feedback[2].SetText($"Year: {playerCar.YearOfCar}");
         feedback[1].SetText($"Make: {playerCar.MakeOfCar}");
         feedback[0].SetText($"{playerCar.CurrentSpeed} MPH");
+        playerCar.AccelerateCar();
+        playerCar.DecelerateCar();
     }
+
+    
 }

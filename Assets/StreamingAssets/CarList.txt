@@ -2,7 +2,7 @@ Acura
 Alfa Romeo
 Aston Martin
 Audi
-BMW
+Bmw
 Bentley Motors
 Bollinger Motors
 Bugatti
@@ -17,7 +17,7 @@ Ferrari
 Fiat
 Fisker
 Ford
-GMC
+Gmc
 Genesis
 Honda
 Hummer
@@ -39,8 +39,7 @@ Maserati
 Maybach
 Mazda
 McLaren
-Mercedes-AMG
-Mercedes-Benz
+Mercedes
 Mercury
 Mini
 Mitsubishi
