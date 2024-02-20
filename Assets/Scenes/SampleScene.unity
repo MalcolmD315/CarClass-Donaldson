@@ -296,7 +296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 223, y: -108}
+  m_AnchoredPosition: {x: 223, y: 33}
   m_SizeDelta: {x: 243.9426, y: 93.882}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &85209272
@@ -1025,8 +1025,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 22.810486, y: 116}
-  m_SizeDelta: {x: 605.8815, y: 93.882}
+  m_AnchoredPosition: {x: 13, y: 141}
+  m_SizeDelta: {x: 635, y: 99.786}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &375067754
 MonoBehaviour:
@@ -1048,7 +1048,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Make: Honda
+  m_text: 'Make: DeLorean Motor Company
 
 '
   m_isRightToLeft: 0
@@ -1161,7 +1161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -106, y: -108}
+  m_AnchoredPosition: {x: -106, y: 33}
   m_SizeDelta: {x: 512.9138, y: 93.882}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &500654762
