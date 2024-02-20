@@ -19,7 +19,8 @@ public class Gameplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI makeInput;
     [SerializeField] TextMeshProUGUI yearInput;
     [SerializeField] List<TextMeshProUGUI> feedbackText = new List<TextMeshProUGUI>(5);
-    [SerializeField] GameObject submitButton; 
+    [SerializeField] GameObject submitButton;
+    [SerializeField] GameObject quitButton;
     private Car inputCar;
 
     // Start is called before the first frame update
@@ -116,6 +117,12 @@ public class Gameplay : MonoBehaviour
     public void OnSubmitClick() 
     {        
         inputCar = CarInstantiate(MakeInput(makeInput), CarYear(yearInput), feedbackText, inputCar);
+    }
+
+    //Quit button method
+    public void OnQuitClick() 
+    {
+        Application.Quit();
     }
 
     //Creating the car in ui
